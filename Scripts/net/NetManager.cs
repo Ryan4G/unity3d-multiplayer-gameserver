@@ -169,7 +169,7 @@ public class NetManager
         readBuff.readIdx += bodyCount;
         readBuff.CheckAndMoveBytes();
 
-        MethodInfo mei = typeof(EventHandler).GetMethod(protoName);
+        MethodInfo mei = typeof(MsgHandler).GetMethod(protoName);
         object[] obs = { clientState, msgBase };
 
         Console.WriteLine($"[ Server ] Receive {protoName}");
@@ -197,7 +197,7 @@ public class NetManager
         mei.Invoke(null, obs);
     }
 
-    public static void Send(ClientState clientState MsgBase msg)
+    public static void Send(ClientState clientState, MsgBase msg)
     {
         Socket socket = clientState.socket;
 

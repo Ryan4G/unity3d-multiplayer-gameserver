@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-public class SysMsgHandler
+
+public partial class MsgHandler
 {
+    public static void MsgPing(ClientState c, MsgBase msgBase)
+    {
+        Console.WriteLine("MsgPing");
+    }
 }
+

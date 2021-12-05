@@ -15,7 +15,7 @@ public class MsgBase
     public static MsgBase Decode(string protoName, byte[] bytes, int offset, int count)
     {
         string s = System.Text.Encoding.UTF8.GetString(bytes, offset, count);
-        MsgBase msgBase = JsonConvert.DeserializeObject<MsgBase>(s);
+        MsgBase msgBase = (MsgBase)JsonConvert.DeserializeObject(s, Type.GetType(protoName));
 
         return msgBase;
     }
