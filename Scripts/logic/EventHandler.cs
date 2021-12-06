@@ -8,6 +8,12 @@ public partial class EventHandler
     public static void OnDisconnect(ClientState c)
     {
         Console.WriteLine($"[ Server ] Socket Close {c.socket.RemoteEndPoint}");
+
+        if (c.player != null)
+        {
+            DBManager.UpdatePlayerData(c.player.id, c.player.data);
+            PlayerManager.RemovePlayer(c.player.id);
+        }
     }
 
     public static void OnTimer()

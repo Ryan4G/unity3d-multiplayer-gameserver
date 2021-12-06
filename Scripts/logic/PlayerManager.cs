@@ -26,7 +26,7 @@ public class PlayerManager
         }
     }
 
-    public static void RemovePlayer(string id, Player player)
+    public static void RemovePlayer(string id)
     {
         if (players.ContainsKey(id))
         {
