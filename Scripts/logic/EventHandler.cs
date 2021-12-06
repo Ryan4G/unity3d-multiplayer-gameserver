@@ -7,11 +7,29 @@ public partial class EventHandler
 {
     public static void OnDisconnect(ClientState c)
     {
-        Console.WriteLine("Close");
+        Console.WriteLine($"[ Server ] Socket Close {c.socket.RemoteEndPoint}");
     }
 
     public static void OnTimer()
     {
+        CheckPing();
+    }
 
+    public static void CheckPing()
+    {
+        long timeNow = NetManager.GetTimeStamp();
+
+        foreach (ClientState s in NetManager.clients.Values)
+        {
+            if (timeNow - s.lastPingTime > NetManager.pingInterval * 4)
+            {
+                Console.WriteLine($"[ Server ] Ping Close {s.socket.RemoteEndPoint} -> {timeNow}");
+
+                NetManager.Close(s);
+
+                // close a socket each time
+                return;
+            }
+        }
     }
 }

@@ -12,8 +12,10 @@ public class NetManager
 
     public static Dictionary<Socket, ClientState> clients = new Dictionary<Socket, ClientState>();
 
-    static List<Socket> checkRead = new List<Socket>(); 
-    
+    static List<Socket> checkRead = new List<Socket>();
+
+    public static long pingInterval = 2;
+
     public static void StartLoop(int listenPort)
     {
         Console.WriteLine("[ Server ] Started! ");
@@ -63,10 +65,11 @@ public class NetManager
         {
             Socket socket = serverSocket.Accept();
 
-            Console.WriteLine($"[ Server ] Accept <- {socket.RemoteEndPoint}");
+            Console.WriteLine($"[ Server ] Accept <- {socket.RemoteEndPoint} <- {GetTimeStamp()}");
 
             ClientState clientState = new ClientState();
             clientState.socket = socket;
+            clientState.lastPingTime = GetTimeStamp();
             clients.Add(socket, clientState);
         }
         catch (SocketException ex)
@@ -122,7 +125,7 @@ public class NetManager
         readBuff.CheckAndMoveBytes();
     }
 
-    private static void Close(ClientState clientState)
+    public static void Close(ClientState clientState)
     {
         MethodInfo mei = typeof(EventHandler).GetMethod("OnDisconnect");
         object[] obs = { clientState };
@@ -230,4 +233,9 @@ public class NetManager
         }
     }
 
+    public static long GetTimeStamp()
+    {
+        TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
+        return Convert.ToInt64(ts.TotalSeconds);
+    }
 }
