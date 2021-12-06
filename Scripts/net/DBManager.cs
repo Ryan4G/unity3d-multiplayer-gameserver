@@ -114,6 +114,9 @@ public class DBManager
         {
             MySqlCommand cmd = new MySqlCommand(sql, mysql);
             cmd.ExecuteNonQuery();
+            
+            Console.WriteLine($"[ Database ] CreatePlayer -> {id} Successful");
+
             return true;
         }
         catch (Exception ex)
@@ -209,6 +212,8 @@ public class DBManager
         {
             MySqlCommand cmd = new MySqlCommand(s, mysql);
             cmd.ExecuteNonQuery();
+
+            Console.WriteLine($"[ Database ] Update Player {id} Data");
 
             return true;
         }

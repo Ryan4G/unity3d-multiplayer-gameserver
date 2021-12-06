@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public partial class LoginMsgHandler
+public partial class MsgHandler
 {
     public static void MsgRegister(ClientState c, MsgBase msgBase)
     {
@@ -75,19 +75,8 @@ public partial class LoginMsgHandler
 
         c.player = player;
 
-        msgLogin.result = 0;
+        msgLogin.result = 1;
         player.Send(msgLogin);
 
-    }
-
-    public static void MsgKick(ClientState c, MsgBase msgBase)
-    {
-        MsgKick msgMove = (MsgKick)msgBase;
-
-        Console.WriteLine(msgMove.x);
-
-        msgMove.x++;
-
-        NetManager.Send(c, msgMove);
     }
 }

@@ -14,7 +14,7 @@ public class NetManager
 
     static List<Socket> checkRead = new List<Socket>();
 
-    public static long pingInterval = 2;
+    public static long pingInterval = 30;
 
     public static void StartLoop(int listenPort)
     {

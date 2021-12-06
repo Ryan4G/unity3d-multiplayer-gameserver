@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public partial class NotepadMsgHandler
+public partial class MsgHandler
 {
     public static void MsgGetText(ClientState c, MsgBase msgBase)
     {
